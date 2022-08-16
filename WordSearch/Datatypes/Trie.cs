@@ -4,7 +4,6 @@
     {
         public Dictionary<char, Node> Children { get; set; }
         public bool IsLastCharOfWord { get; set; }
-        public Mutex Mutex { get; set; }
 
         public Node()
         {
