@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.DirectoryServices;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,7 +16,7 @@ namespace WordSearchGUI
     {
         private string _DemoWordsInfoText;
 
-        public List<string> SearchResult { get; set; }
+        private List<string> _SearchResult;
 
         private Trie m_searchTrie;
 
@@ -27,6 +28,8 @@ namespace WordSearchGUI
 
             _DemoWordsInfoText = string.Empty;
             DemoWordsInfoText = "No Demo Words Available";
+            _SearchResult = new List<string>();
+            SearchResult = new List<string>();
 
             m_searchTrie = new Trie(); 
         }
@@ -45,6 +48,19 @@ namespace WordSearchGUI
                 {
                     _DemoWordsInfoText = value;
                     OnPropertyChanged("DemoWordsInfoText");
+                }
+            }
+        }
+
+        public List<string> SearchResult
+        {
+            get { return _SearchResult; }
+            set
+            {
+                if (value != _SearchResult)
+                {
+                    _SearchResult = value;
+                    OnPropertyChanged("SearchResult");
                 }
             }
         }
