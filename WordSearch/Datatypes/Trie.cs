@@ -50,6 +50,12 @@
             }
 
             List<string> searchResult = new();
+
+            if (currentNode.IsLastCharOfWord)
+            {
+                searchResult.Add(prefix);
+            }
+
             GetAllWordsForNodeRecursive(prefix, currentNode, ref searchResult);
 
             return searchResult;
@@ -59,9 +65,14 @@
         {
             foreach (char nodeChar in startNode.Children.Keys)
             {
-                if (startNode.Children[nodeChar].IsLastCharOfWord)
+                Node childNode = startNode.Children[nodeChar];
+                if (childNode.IsLastCharOfWord)
                 {
                     searchResult.Add(prefix + nodeChar);
+                }
+
+                if (!childNode.Children.Any())
+                {
                     continue;
                 }
 
