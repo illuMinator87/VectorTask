@@ -15,10 +15,9 @@ namespace WordSearchGUI
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private string _DemoWordsInfoText;
-
         private bool _AreDemoWordsReady;
-
         private List<string> _SearchResult;
+        private string _SearchStats;
 
         private Trie m_searchTrie;
 
@@ -82,6 +81,19 @@ namespace WordSearchGUI
             }
         }
 
+        public string SearchStats
+        {
+            get { return _SearchStats; }
+            set
+            {
+                if (value != _SearchStats)
+                {
+                    _SearchStats = value;
+                    OnPropertyChanged("SearchStats");
+                }
+            }
+        }
+
         private void GenerateDemoWords_Click(object sender, RoutedEventArgs e)
         {
             Stopwatch watch = Stopwatch.StartNew();
@@ -119,7 +131,18 @@ namespace WordSearchGUI
             searchTextBox.SelectionStart = searchTextBox.Text.Length;
             searchTextBox.SelectionLength = 0;
 
+            if (searchTextBox.Text.Length <= 0)
+            {
+                SearchResult.Clear();
+                SearchStats = string.Empty;
+                return;
+            }
+
+            Stopwatch watch = Stopwatch.StartNew();
             SearchResult = m_searchTrie.FindWordsWithPrefix(searchTextBox.Text);
+            watch.Stop();
+
+            SearchStats = $"Found {SearchResult.Count} words in {watch.Elapsed.TotalMilliseconds} Milliseconds.";
         }
     }
 }
