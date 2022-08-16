@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WordSearchGUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Word Search" Height="450" Width="800">
 
-    </Grid>
+    <StackPanel Orientation="Vertical">
+
+        <StackPanel Orientation="Vertical"
+                    Margin="20">
+            
+            <TextBlock Margin="0, 0, 0, 3">Test Data</TextBlock>
+            <Border BorderThickness="2"
+                BorderBrush="Gray"
+                Padding="10">
+
+                <StackPanel Orientation="Horizontal">
+                    <Button>Generate Demo Words</Button>
+                    <TextBlock VerticalAlignment="Center"
+                               Margin="10, 0, 0, 0">No Demo Words Available</TextBlock>    
+                </StackPanel>
+                
+                
+                
+            </Border>
+        </StackPanel>
+        
+    </StackPanel>
+    
 </Window>
