@@ -12,7 +12,7 @@ namespace Datatypes
         {
             List<string> words = new();
 
-            char[] alphabet = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+            char[] alphabet = GetAlphabet();
 
             for (int i = 0; i < alphabet.Length; i++)
             {
@@ -32,6 +32,11 @@ namespace Datatypes
             List<string> randomizedOrder = words.OrderBy(word => random.Next()).ToList();
 
             return randomizedOrder;
+        }
+
+        public static char[] GetAlphabet()
+        {
+            return new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
         }
     }
 }
