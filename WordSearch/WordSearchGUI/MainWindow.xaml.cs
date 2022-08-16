@@ -16,6 +16,8 @@ namespace WordSearchGUI
     {
         private string _DemoWordsInfoText;
 
+        private bool _AreDemoWordsReady;
+
         private List<string> _SearchResult;
 
         private Trie m_searchTrie;
@@ -30,6 +32,8 @@ namespace WordSearchGUI
             DemoWordsInfoText = "No Demo Words Available";
             _SearchResult = new List<string>();
             SearchResult = new List<string>();
+            _AreDemoWordsReady = false;
+            AreDemoWordsReady = false;
 
             m_searchTrie = new Trie(); 
         }
@@ -48,6 +52,19 @@ namespace WordSearchGUI
                 {
                     _DemoWordsInfoText = value;
                     OnPropertyChanged("DemoWordsInfoText");
+                }
+            }
+        }
+
+        public bool AreDemoWordsReady
+        {
+            get { return _AreDemoWordsReady; }
+            set
+            {
+                if (value != _AreDemoWordsReady)
+                {
+                    _AreDemoWordsReady = value;
+                    OnPropertyChanged("AreDemoWordsReady");
                 }
             }
         }
@@ -81,6 +98,7 @@ namespace WordSearchGUI
             double treeBuildingDuration = watch.Elapsed.TotalMilliseconds;
 
             DemoWordsInfoText = $"Generated {demoWords.Count} words in {demoWordsDuration} Milliseconds.\nBuilding Search Trie took {treeBuildingDuration} Milliseconds.";
+            AreDemoWordsReady = true;
         }
 
         private void SearchWord_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)

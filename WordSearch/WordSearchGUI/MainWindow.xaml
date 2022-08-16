@@ -29,7 +29,8 @@
             <Border BorderThickness="2"
                     BorderBrush="Gray"
                     Padding="10">
-                <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Vertical"
+                            IsEnabled="{Binding AreDemoWordsReady, ElementName=ThisWindow}">
                     <DockPanel LastChildFill="True">
                         <TextBlock>Search Word:</TextBlock>
                         <TextBox Margin="10, 0, 0, 0"
