@@ -45,12 +45,18 @@ namespace Tests
 
             List<string> result = trie.FindWordsWithPrefix("A");
             result.Should().HaveCount((int)Math.Pow(26, 3), $"the result should be 'A' plus all possible combinations for the last 3 letters: {(int)Math.Pow(26, 3)}");
+            result.Contains("ABCD").Should().BeTrue();
+            result.Contains("BAAA").Should().BeFalse();
 
             result = trie.FindWordsWithPrefix("BB");
             result.Should().HaveCount((int)Math.Pow(26, 2), $"the result should be 'BB' plus all possible combinations for the last 2 letters: {(int)Math.Pow(26, 2)}");
+            result.Contains("BBCD").Should().BeTrue();
+            result.Contains("BAAA").Should().BeFalse();
 
             result = trie.FindWordsWithPrefix("CCC");
             result.Should().HaveCount(26, $"the result should be 'CCC' plus one word for each of the 26 letters in the alphabet.");
+            result.Contains("CCCD").Should().BeTrue();
+            result.Contains("CCAA").Should().BeFalse();
         }
     }
 }
