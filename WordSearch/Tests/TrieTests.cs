@@ -12,10 +12,7 @@ namespace Tests
             List<string> inputWords = new() { "test", "testing", "trie", "trietest", "banana"};
 
             Trie trie = new();
-            foreach (string word in inputWords)
-            {
-                trie.InsertWord(word);
-            }
+            trie.InsertWordsMultithhreaded(inputWords);
 
             List<string> result = trie.FindWordsWithPrefix("test");
             result.Should().HaveCount(2, $"the words 'test' and 'testing' should match the prefix 'test'");
@@ -38,10 +35,7 @@ namespace Tests
             List<string> demoWords = Util.GenerateDemoWords();
 
             Trie trie = new Trie();
-            foreach (string word in demoWords)
-            {
-                trie.InsertWord(word);
-            }
+            trie.InsertWordsMultithhreaded(demoWords);
 
             List<string> result = trie.FindWordsWithPrefix("A");
             result.Should().HaveCount((int)Math.Pow(26, 3), $"the result should be 'A' plus all possible combinations for the last 3 letters: {(int)Math.Pow(26, 3)}");
