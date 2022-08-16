@@ -22,6 +22,19 @@
             RootNode = new Node();
         }
 
+        public void InsertWord(string word)
+        {
+            Node currentNode = RootNode;
 
+            foreach (char letter in word)
+            {
+                if (!currentNode.Children.ContainsKey(letter))
+                {
+                    currentNode.Children.Add(letter, new Node());
+                }
+                currentNode = currentNode.Children[letter];
+            }
+            currentNode.IsLastCharOfWord = true;
+        }
     }
 }
