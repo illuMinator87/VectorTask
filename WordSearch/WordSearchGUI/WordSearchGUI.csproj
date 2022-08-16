@@ -7,4 +7,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Datatypes\Datatypes.csproj" />
+  </ItemGroup>
+
 </Project>
