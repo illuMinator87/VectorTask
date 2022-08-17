@@ -50,13 +50,23 @@ namespace Datatypes
         {
             const int numThreads = 12;
 
-            int chunkSize = words.Count / numThreads;
+            if (words.Count <= numThreads)
+            {
+                InsertWords(words);
+                return;
+            }
+
+            int chunkSize = (int)Math.Floor(words.Count * 1.0 / numThreads * 1.0);
 
             List<Thread> threads = new();
             for (int i = 0; i < numThreads; i++)
             {
                 int startIndex = i * chunkSize;
                 int endIndex = ((i + 1) * chunkSize) - 1;
+                if (i == numThreads - 1)
+                {
+                    endIndex = words.Count - 1;
+                }
 
                 Thread thread = new Thread(() => InsertWordsThreadSafe(startIndex, endIndex, words));
                 threads.Add(thread);

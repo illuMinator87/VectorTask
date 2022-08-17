@@ -9,6 +9,7 @@ namespace Tests
         [Test]
         public void TestInsertAndFindWords()
         {
+            // Uses the single threaded method, since input words are less than amount of threads
             List<string> inputWords = new() { "test", "testing", "trie", "trietest", "banana"};
 
             Trie trie = new();
@@ -27,6 +28,23 @@ namespace Tests
             result = trie.FindWordsWithPrefix("b");
             result.Should().HaveCount(1, $"the word 'banana' should match the prefix 'b'");
             result[0].Should().Be("banana");
+
+            // Uses the multithreaded insert, but has only slightly more words than threads
+            // This is supposed to check if the words are correctly split up between threads
+            inputWords = new() { "Lorem", "ipsum", "dolor", "sit", "amet", "consetetur", "sadipscing", "elitr", "sed", "diam", "nonumy", "eirmod", "tempor", "invidunt", "ut" };
+            trie = new();
+            trie.InsertWordsMultithhreaded(inputWords);
+
+            result = trie.FindWordsWithPrefix("Lorem"); //First word
+            result.Should().HaveCount(1, $"the prefix 'Lorem' exists only once");
+            result[0].Should().Be("Lorem");
+
+            result = trie.FindWordsWithPrefix("ut"); //Last word
+            result.Should().HaveCount(1, $"the prefix 'ut' exists only once");
+            result[0].Should().Be("ut");
+
+            result = trie.FindWordsWithPrefix("s"); //First word
+            result.Should().HaveCount(3, $"there are 3 words that start with s");
         }
 
         [Test]
