@@ -23,9 +23,15 @@ namespace WordSearch
             watch.Restart();
             List<string> searchResult = searchTrie.FindWordsWithPrefix(searchString);
             watch.Stop();
-
             Console.WriteLine($"Done Searching... Result:");
-            Console.WriteLine($"Search took {watch.Elapsed.TotalMilliseconds} milliseconds");
+            Console.WriteLine($"Found {searchResult.Count} words in {watch.Elapsed.TotalMilliseconds} Milliseconds");
+
+            Console.WriteLine($"Searching multithreaded brute force:");
+            BruteForceArray bruteForceArray = new(testWords);
+            watch.Restart();
+            searchResult = bruteForceArray.FindWordsWithPrefix(searchString);
+            watch.Stop();
+            Console.WriteLine($"Found {searchResult.Count} words in {watch.Elapsed.TotalMilliseconds} Milliseconds.");
         }
     }
 }
